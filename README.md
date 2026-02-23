@@ -40,8 +40,9 @@
 
 Смотрим информацию о всех компьютерах в кластере
 
-NAME|STATUS|ROLES|AGE|VERSION
-hw-cluster1-control-plane|Ready|control-plane|27s|v1.32.0
+|NAME|STATUS|ROLES|AGE|VERSION|
+|----|------|-----|---|-------|
+|hw-cluster1-control-plane|Ready|control-plane|27s|v1.32.0|
 
 Добавляем конфигурационный файл 
 ``` yaml
@@ -75,9 +76,10 @@ spec:
 ```
 Смотрим созданные контейнеры
 
-NAME|READY|STATUS|RESTARTS|AGE
-web-6b66d587bd-47lmh|1/1|Running|0|5m14s
-web-6b66d587bd-z5mvs|1/1|Running|0|5m14s
+|NAME|READY|STATUS|RESTARTS|AGE|
+|----|-----|------|--------|---|
+|web-6b66d587bd-47lmh|1/1|Running|0|5m14s|
+|web-6b66d587bd-z5mvs|1/1|Running|0|5m14s|
 
 Пробросим порты, создадим тунель:
 
