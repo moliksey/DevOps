@@ -116,16 +116,30 @@ scrape_configs:
 ```
 Скачаем и установим node_exporter как сервис, потому что так рекомендовано.
 ``` bash
-сd /tmp
-wget $(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4)
-tar -xvf node_exporter-*.tar.gz
-cd node_exporter-1.10.2.linux-amd64
-sudo useradd --no-create-home --shell /bin/false node_exporter
-sudo cp node_exporter /usr/local/bin/
-sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
-sudo nano /etc/systemd/system/node_exporter.service
+  сd /tmp
+  wget $(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4)
+  tar -xvf node_exporter-*.tar.gz
+  cd node_exporter-1.10.2.linux-amd64
+  sudo useradd --no-create-home --shell /bin/false node_exporter
+  sudo cp node_exporter /usr/local/bin/
+  sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
+  sudo nano /etc/systemd/system/node_exporter.service
 ```
+Забыл сказать в видео, что мы прописываем вот такой конфиг в /etc/systemd/system/node_exporter.service
 
+```
+  [Unit]
+  Description=Node Exporter
+  Wants=network-online.target
+  After=network-online.target
+  [Service]
+  User=node_exporter
+  Group=node_exporter
+  Type=simple
+  ExecStart=/usr/local/bin/node_exporter
+  [Install]
+  WantedBy=multi-user.target
+```
 Загружаем службу и запускаем ее:
 
 ``` bash 
